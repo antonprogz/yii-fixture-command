@@ -3,6 +3,7 @@
 
 namespace antonprogz\yii_fixture_command;
 
+\Yii::import('system.test.CDbFixtureManager');
 
 class FixtureManager extends \CDbFixtureManager
 {
