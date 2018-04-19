@@ -48,6 +48,10 @@ class FixtureCommand extends \CConsoleCommand
 
         }
 
+        foreach ($fixtures as $key => $table) {
+            $fixtures[$key] = ':' . $table;
+        }
+
         $this->fixture->load($fixtures);
 
         return 0;
@@ -82,6 +86,10 @@ class FixtureCommand extends \CConsoleCommand
         $all = array_keys($this->fixture->getFixtures());
 
         $fixtures = array_combine($all, $all);
+
+        foreach ($fixtures as $key => $table) {
+            $fixtures[$key] = ':' . $table;
+        }
 
         $this->fixture->load($fixtures);
 
