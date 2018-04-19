@@ -1,8 +1,7 @@
 <?php
 
-namespace antonprgz\yii_fixture_command;
+namespace antonprogz\yii_fixture_command;
 
-use antonprogz\yii_fixture_command\FixtureManager;
 
 /**
  * Class FixtureCommand
