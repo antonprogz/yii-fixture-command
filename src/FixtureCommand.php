@@ -34,6 +34,7 @@ class FixtureCommand extends \CConsoleCommand
         if (!$fixture instanceof FixtureManager) {
             throw new \CException("Can't get a proper fixture manager component.");
         }
+
         $this->fixture = $fixture;
         parent::init();
     }
