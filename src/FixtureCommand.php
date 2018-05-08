@@ -26,6 +26,10 @@ class FixtureCommand extends \CConsoleCommand
      */
     public function init()
     {
+        if (!YII_DEBUG) {
+            throw new \CException("This command should be used in the debug mode only.");
+        }
+
         $fixture = \Yii::app()->getComponent($this->fixture_id);
         if (!$fixture instanceof FixtureManager) {
             throw new \CException("Can't get a proper fixture manager component.");
@@ -131,6 +135,12 @@ class FixtureCommand extends \CConsoleCommand
         }
 
         return 0;
+    }
+
+
+    public function actionTruncateTables()
+    {
+        $this->fixture->truncateTables();
     }
 
 }
