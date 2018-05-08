@@ -139,9 +139,30 @@ class FixtureCommand extends \CConsoleCommand
     }
 
 
+    /**
+     * @throws \CDbException
+     * @throws \CException
+     */
     public function actionTruncateTables()
     {
-        $this->fixture->truncateTables();
+
+        /** @var \CConsoleApplication $app */
+        $app = \Yii::app();
+
+        $cmd = $app->getCommandRunner()->createCommand('migrate');
+
+        $migration_table = '';
+
+        if ($cmd instanceof \MigrateCommand) {
+            $migration_table = $cmd->migrationTable;
+        }
+
+        foreach($app->db->getSchema()->getTableNames() as $table_name) {
+            if ($table_name != $migration_table) {
+                $this->fixture->truncateTable($table_name);
+            }
+        }
+
     }
 
 }
