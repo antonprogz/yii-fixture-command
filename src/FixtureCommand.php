@@ -66,12 +66,23 @@ class FixtureCommand extends \CConsoleCommand
     private function load($fixtures)
     {
 
-        $this->raiseEvent('onBeforeLoad', new FixtureEvent($fixtures, $this));
+        $this->onBeforeLoad(new FixtureEvent($fixtures, $this));
 
         $this->fixture->load($fixtures);
 
-        $this->raiseEvent('onAfterLoad', new FixtureEvent($fixtures, $this));
+        $this->onAfterLoad(new FixtureEvent($fixtures, $this));
 
+    }
+
+
+    public function onBeforeLoad($event)
+    {
+        $this->raiseEvent('onBeforeLoad', $event);
+    }
+
+    public function onAfterLoad($event)
+    {
+        $this->raiseEvent('onAfterLoad', $event);
     }
 
     private function echoNotExisting(array $not_existing)
