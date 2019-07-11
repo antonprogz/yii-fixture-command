@@ -179,11 +179,15 @@ class FixtureCommand extends \CConsoleCommand
             $migration_table = $cmd->migrationTable;
         }
 
+        $this->fixture->checkIntegrity(false);
+
         foreach($app->db->getSchema()->getTableNames() as $table_name) {
             if ($table_name != $migration_table) {
                 $this->fixture->truncateTable($table_name);
             }
         }
+
+        $this->fixture->checkIntegrity(true);
 
     }
 
